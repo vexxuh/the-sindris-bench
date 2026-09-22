@@ -1,2 +1,5 @@
 /tsb
+/tsb.exe
+/cli/tsb-cli
+/cli/tsb-cli.exe
 *.bin

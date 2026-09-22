@@ -3,7 +3,7 @@ package main
 import "core:fmt"
 import "core:os"
 import "core:strings"
-import "diff/engine"
+import "../diff/engine"
 
 usage :: proc(prog: string) {
 	fmt.eprintfln("usage: %s <old-file> <new-file> [--algorithm=myers|patience|histogram]", prog)

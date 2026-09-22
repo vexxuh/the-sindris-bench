@@ -31,6 +31,9 @@ main :: proc() {
 	load_font(FONT_BODY, FONT_SIZE_BODY, "gui/assets/fonts/Inter.ttf")
 	load_font(FONT_MONO, FONT_SIZE_MONO, "gui/assets/fonts/JetBrainsMono.ttf")
 
+	state := app_state_init()
+	defer app_state_destroy(&state)
+
 	for !rl.WindowShouldClose() {
 		defer free_all(context.temp_allocator)
 
@@ -39,7 +42,7 @@ main :: proc() {
 		clay.SetLayoutDimensions({f32(rl.GetScreenWidth()), f32(rl.GetScreenHeight())})
 
 		clay.BeginLayout()
-		build_frame()
+		build_frame(&state)
 		render_commands := clay.EndLayout(rl.GetFrameTime())
 
 		rl.BeginDrawing()
@@ -49,7 +52,7 @@ main :: proc() {
 	}
 }
 
-build_frame :: proc() {
+build_frame :: proc(state: ^App_State) {
 	if clay.UI(clay.ID("App"))(
 	{
 		layout = {sizing = {clay.SizingGrow({}), clay.SizingGrow({})}, layoutDirection = .TopToBottom},
@@ -65,5 +68,25 @@ build_frame :: proc() {
 		) {
 			clay.Text("tsb", {fontId = FONT_HEADING, fontSize = FONT_SIZE_DISPLAY, textColor = NORD_SNOW_2})
 		}
+
+		tab_bar(state)
+
+		switch state.active_tab {
+		case .Diff:
+			placeholder_screen("DIFF")
+		case .Json:
+			placeholder_screen("JSON")
+		case .Passphrase:
+			passphrase_screen(&state.passphrase)
+		}
+	}
+}
+
+@(private = "file")
+placeholder_screen :: proc(name: string) {
+	if clay.UI(clay.ID("Placeholder"))(
+	{layout = {sizing = {clay.SizingGrow({}), clay.SizingGrow({})}, padding = clay.PaddingAll(SPACE_XL)}},
+	) {
+		clay.Text(fmt.tprintf("%s — coming soon", name), {fontId = FONT_BODY, fontSize = FONT_SIZE_BODY, textColor = NORD_SNOW_0})
 	}
 }

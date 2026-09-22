@@ -8,7 +8,7 @@ package main
 import "core:os"
 import "core:path/filepath"
 import "core:testing"
-import "diff/engine"
+import "../diff/engine"
 
 @(private)
 write_fixture :: proc(t: ^testing.T, dir, name, content: string) -> string {

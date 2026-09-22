@@ -1,7 +1,7 @@
 package main
 
 import "core:fmt"
-import "diff/engine"
+import "../diff/engine"
 
 // Number of unchanged lines shown around each change, same default as `diff -u`.
 CONTEXT_LINES :: 3

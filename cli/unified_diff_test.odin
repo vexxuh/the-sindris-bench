@@ -1,7 +1,7 @@
 package main
 
 import "core:testing"
-import "diff/engine"
+import "../diff/engine"
 
 // A small shared intern table: token id == its index, so old_tokens /
 // new_tokens can just be identity ranges into it for these tests.

@@ -4,7 +4,7 @@ import "core:fmt"
 import "core:os"
 import "core:strconv"
 import "core:strings"
-import "json"
+import "../json"
 
 pretty_usage :: proc(prog: string) {
 	fmt.eprintfln("usage: %s --pretty <file.json> [--indent=N]", prog)

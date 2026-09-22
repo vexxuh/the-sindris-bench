@@ -4,7 +4,7 @@ import "core:fmt"
 import "core:os"
 import "core:strconv"
 import "core:strings"
-import "password"
+import "../password"
 
 passphrase_usage :: proc(prog: string) {
 	fmt.eprintfln("usage: %s --passphrase [--words=N] [--separator=SEP] [--capitalize]", prog)
